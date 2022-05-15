@@ -1,0 +1,13 @@
+*{
+    margin:0;
+    padding: 0;
+}
+#MyCanvas{
+    margin: 0 auto;
+    padding: 0;
+    display: block;
+    /* width:840px;
+    height:595px; */
+    /* border:solid 1px black; */
+    /* background-color: aquamarine; */
+}
