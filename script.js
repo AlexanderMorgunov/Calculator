@@ -316,7 +316,6 @@ ctx.fill();
 ctx.stroke();
 ctx.fillStyle="black";
 ctx.font = "28px Roboto";
-// ctx.direction = "rtl";
 ctx.fillText(newCalculate.number.value, 580,170);
 ctx.closePath();
 
@@ -433,6 +432,5 @@ document.addEventListener('keydown',function(e){
 
 document.addEventListener('keydown',function(e){
     InputNumbers(e);
-    console.log(e.key);
 });
 
