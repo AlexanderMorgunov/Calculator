@@ -244,7 +244,7 @@ class calculate{
         
             DisplayRender(this.arithmeticActions);
             break;
-            
+
             case '+/-':
             if(+(this.arithmeticActions[this.arithmeticActions.length-1]).toString()!="NaN"){
 
@@ -252,9 +252,18 @@ class calculate{
                     let str = this.arithmeticActions;
                     let num = this.number.value;
                     if(this.number.isPositive==true){
-                        this.arithmeticActions = (str.substring(0,(str.length-num.length))+'-'+str.substring((str.length-num.length),str.length));
-                        this.number.isPositive = false;
-                        this.number.value = '-'+this.number.value;
+
+                        if(str[(str.length)-(num.length)-1]=='-'){
+                            newCalculate.arithmeticActions = str.substring(0,(str.length-num.length-1))+'+'+str.substring((str.length-num.length),str.length);
+                        }
+                        else{
+
+                            this.arithmeticActions = (str.substring(0,(str.length-num.length))+'-'+str.substring((str.length-num.length),str.length));
+                            this.number.isPositive = false;
+                            this.number.value = '-'+this.number.value;
+
+                        }
+
                     }
                     else{
                         this.arithmeticActions = (str.substring(0,(str.length-num.length))+str.substring((str.length-num.length+1),str.length));
@@ -388,19 +397,23 @@ function addArifmeticSign(sign){
         case '=':
         case 'Enter':
         removeUselessSign();
-        newCalculate.number.value = '';
-        newCalculate.number.isPositive = true;
         newCalculate.previousArithmeticActions.value = newCalculate.arithmeticActions;
         DisplayRender(eval(newCalculate.arithmeticActions));
-        newCalculate.arithmeticActions = eval(newCalculate.arithmeticActions);
+        newCalculate.arithmeticActions = eval(newCalculate.arithmeticActions).toString();
+        newCalculate.number.value = newCalculate.arithmeticActions;
         break;        
     }
-// }
 }
 
 function removeUselessSign(){
     if((+(newCalculate.arithmeticActions[newCalculate.arithmeticActions.length-1])).toString()=="NaN"){
-        newCalculate.arithmeticActions=newCalculate.arithmeticActions.slice(0,-1);
+        newCalculate.arithmeticActions = newCalculate.arithmeticActions.toString().slice(0,-1);
+    }
+}
+
+function InputNumbers(e){
+    if(parseInt(e.key).toString()!='NaN'){
+        newCalculate.clickOnButton(e.key);
     }
 }
 
@@ -416,6 +429,10 @@ canvas.addEventListener("click",function(e){
 
 document.addEventListener('keydown',function(e){
     addArifmeticSign(e.key);
+});
+
+document.addEventListener('keydown',function(e){
+    InputNumbers(e);
     console.log(e.key);
 });
 
